@@ -1,8 +1,11 @@
 package com.juarez.stream_API.engine.problem;
 
+import com.juarez.stream_API.engine.contract.Attackable;
+import com.juarez.stream_API.engine.contract.Healable;
+
 import java.util.logging.Logger;
 
-public class Mage {
+public class Mage implements Attackable, Healable {
 
 
     private static final Logger log = Logger.getLogger(Mage.class.getName());
@@ -23,11 +26,18 @@ public class Mage {
         return health;
     }
 
-    public void mageAttack() {
+    @Override
+    public void attack() {
+
         log.info(name + " attacks with a fireball!");
+
+
     }
 
-    public void mageHeal() {
+    @Override
+    public void heal() {
+
         log.info(name + " heals with arcane energy!");
+
     }
 }

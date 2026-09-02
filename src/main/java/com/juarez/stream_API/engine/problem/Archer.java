@@ -1,8 +1,11 @@
 package com.juarez.stream_API.engine.problem;
 
+import com.juarez.stream_API.engine.contract.Attackable;
+import com.juarez.stream_API.engine.contract.Healable;
+
 import java.util.logging.Logger;
 
-public class Archer {
+public class Archer implements Attackable, Healable {
 
     private static final Logger logger = Logger.getLogger(Archer.class.getName());
 
@@ -22,11 +25,17 @@ public class Archer {
         return health;
     }
 
-    public void archerAttack() {
+     @Override
+    public void attack() {
+
         logger.info(name + " attacks with an arrow!");
+
     }
 
-    public void archerHeal() {
+    @Override
+    public void heal() {
+
         logger.info(name + " heals with herbs!");
+
     }
 }
