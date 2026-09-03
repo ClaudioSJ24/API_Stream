@@ -1,13 +1,7 @@
 package com.juarez.stream_API;
 
-import com.juarez.stream_API.engine.problem.Archer;
-import com.juarez.stream_API.engine.problem.BattleEngine;
-import com.juarez.stream_API.engine.problem.Mage;
-import com.juarez.stream_API.engine.problem.Warrior;
-import com.juarez.stream_API.inventory.domain.Customer;
-import com.juarez.stream_API.inventory.repository.CustomerRepository;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.juarez.stream_API.interfaces.engine.inventory.domain.Customer;
+import com.juarez.stream_API.interfaces.engine.inventory.repository.CustomerRepository;
 
 import java.util.HashMap;
 import java.util.List;

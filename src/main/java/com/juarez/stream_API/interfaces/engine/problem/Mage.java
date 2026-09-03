@@ -1,7 +1,7 @@
-package com.juarez.stream_API.engine.problem;
+package com.juarez.stream_API.interfaces.engine.problem;
 
-import com.juarez.stream_API.engine.contract.Attackable;
-import com.juarez.stream_API.engine.contract.Healable;
+import com.juarez.stream_API.interfaces.contract.Attackable;
+import com.juarez.stream_API.interfaces.contract.Healable;
 
 import java.util.logging.Logger;
 

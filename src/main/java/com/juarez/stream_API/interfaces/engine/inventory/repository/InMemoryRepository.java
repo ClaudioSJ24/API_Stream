@@ -1,4 +1,4 @@
-package com.juarez.stream_API.inventory.repository;
+package com.juarez.stream_API.interfaces.engine.inventory.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

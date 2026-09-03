@@ -1,6 +1,6 @@
-package com.juarez.stream_API.inventory.repository;
+package com.juarez.stream_API.interfaces.engine.inventory.repository;
 
-import com.juarez.stream_API.inventory.domain.Customer;
+import com.juarez.stream_API.interfaces.engine.inventory.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

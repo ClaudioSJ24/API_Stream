@@ -1,4 +1,4 @@
-package com.juarez.stream_API.inventory.domain;
+package com.juarez.stream_API.interfaces.engine.inventory.domain;
 
 public class Customer {
 
