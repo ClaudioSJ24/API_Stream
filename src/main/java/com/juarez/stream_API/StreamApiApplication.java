@@ -1,7 +1,7 @@
 package com.juarez.stream_API;
 
-import com.juarez.stream_API.interfaces.engine.inventory.domain.Customer;
-import com.juarez.stream_API.interfaces.engine.inventory.repository.CustomerRepository;
+import com.juarez.stream_API.lambdas.interfaces.engine.inventory.domain.Customer;
+import com.juarez.stream_API.lambdas.interfaces.engine.inventory.repository.CustomerRepository;
 
 import java.util.HashMap;
 import java.util.List;
