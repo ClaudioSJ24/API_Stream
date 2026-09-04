@@ -1,10 +1,11 @@
 package com.juarez.stream_API.lambda.desing_patterns;
 
-import com.juarez.stream_API.lambda.desing_patterns.dtos.Ticket;
-import com.juarez.stream_API.lambda.desing_patterns.dtos.User;
-import com.juarez.stream_API.lambda.desing_patterns.strategy.PricingStrategies;
-import com.juarez.stream_API.lambda.desing_patterns.strategy.PricingStrategy;
-import com.juarez.stream_API.lambda.desing_patterns.validator.BusinessValidator;
+
+import com.juarez.stream_API.lambdas.desing_patterns.dtos.Ticket;
+import com.juarez.stream_API.lambdas.desing_patterns.dtos.User;
+import com.juarez.stream_API.lambdas.desing_patterns.strategy.PricingStrategies;
+import com.juarez.stream_API.lambdas.desing_patterns.strategy.PricingStrategy;
+import com.juarez.stream_API.lambdas.desing_patterns.validator.BusinessValidator;
 
 import java.util.List;
 
