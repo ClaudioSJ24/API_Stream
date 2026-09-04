@@ -1,12 +1,17 @@
 package com.juarez.stream_API.streams.exersices;
 
+import com.juarez.stream_API.streams.data.DBMusic;
+import com.juarez.stream_API.streams.dtos.Album;
 import com.juarez.stream_API.streams.dtos.Artist;
 import com.juarez.stream_API.streams.dtos.ArtistSummary;
 import com.juarez.stream_API.streams.dtos.Song;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamExercises {
+
+    final List<Artist> artists = DBMusic.ARTISTS;
 
     // ════════════════════════════════════════════════════════════════
     // CLASE 2 — filter + map
@@ -23,7 +28,10 @@ public class StreamExercises {
      * <p>     * @return List<String> con los nombres de artistas de Rock
      */
     public List<String> getRockArtistNames() {
-        throw new UnsupportedOperationException("Implementar ejercicio 2.1");
+        return artists.stream()
+                .filter(artist -> artist.getGenre().equals("Rock"))
+                .map(Artist::getName)
+                .toList();
     }
 
     /**
@@ -37,7 +45,10 @@ public class StreamExercises {
      * <p>     * @return List<ArtistSummary> de artistas con más de un álbum
      */
     public List<ArtistSummary> getArtistsWithMultipleAlbums() {
-        throw new UnsupportedOperationException("Implementar ejercicio 2.2");
+        return artists.stream()
+                .filter(artist -> artist.getAlbums().size() > 2)
+                .map(artist -> new ArtistSummary(artist.getName(), artist.getCountry()))
+                .toList();
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -56,7 +67,11 @@ public class StreamExercises {
      * <p>     * @return List<String> con todos los títulos de álbumes
      */
     public List<String> getAllAlbumTitles() {
-        throw new UnsupportedOperationException("Implementar ejercicio 3.1");
+
+        return artists.stream()
+                .flatMap(artist -> artist.getAlbums().stream())
+                .map(Album::getTitle)
+                .toList();
     }
 
     /**
@@ -71,7 +86,11 @@ public class StreamExercises {
      * <p>     * @return List<Song> con todas las canciones del género Pop
      */
     public List<Song> getAllSongsFromPopArtists() {
-        throw new UnsupportedOperationException("Implementar ejercicio 3.2");
+        return artists.stream()
+                .filter(artist -> artist.getGenre().equals("Pop"))
+                .flatMap(artist -> artist.getAlbums().stream())
+                .flatMap(album -> album.getSongs().stream())
+                .toList();
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -88,7 +107,11 @@ public class StreamExercises {
      * <p>     * @return List<String> con géneros únicos ordenados
      */
     public List<String> getUniqueGenresSorted() {
-        throw new UnsupportedOperationException("Implementar ejercicio 4.1");
+        return artists.stream()
+                .map(Artist::getGenre)
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     /**
@@ -101,7 +124,12 @@ public class StreamExercises {
      */
 
     public List<Artist> getArtistsPage2() {
-        throw new UnsupportedOperationException("Implementar ejercicio 4.2");
+
+        return artists.stream()
+                .sorted(Comparator.comparing(Artist::getName))
+                .skip(5)
+                .limit(5)
+                .toList();
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -118,7 +146,10 @@ public class StreamExercises {
      * <p>     * @return long con la cantidad de artistas de USA
      */
     public long countUSAArtists() {
-        throw new UnsupportedOperationException("Implementar ejercicio 5.1");
+
+        return  artists.stream()
+                .filter(artist -> artist.getCountry().equals("USA"))
+                .count();
     }
 
     /**
@@ -133,7 +164,11 @@ public class StreamExercises {
      * <p>     * @return Optional<Song> con la canción más larga
      */
     public Optional<Song> getLongestSong() {
-        throw new UnsupportedOperationException("Implementar ejercicio 5.2");
+
+        return artists.stream()
+                .flatMap(artist -> artist.getAlbums().stream())
+                .flatMap(album -> album.getSongs().stream())
+                .max(Comparator.comparing(Song::getDurationSeconds));
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -150,7 +185,9 @@ public class StreamExercises {
      * <p>     * @return boolean — true si todos los artistas de Jazz son de USA
      */
     public boolean areAllJazzArtistsFromUSA() {
-        throw new UnsupportedOperationException("Implementar ejercicio 6.1");
+        return artists.stream()
+                .filter(artist -> artist.getGenre().equals("Jazz"))
+                .allMatch(artist -> artist.getCountry().equals("USA"));
     }
 
     /**
@@ -166,7 +203,11 @@ public class StreamExercises {
      * <p>     * @return long con el total de reproducciones
      */
     public long getTotalReproductions() {
-        throw new UnsupportedOperationException("Implementar ejercicio 6.2");
+        return artists.stream()
+                .flatMap(artist -> artist.getAlbums().stream())
+                .flatMap(album -> album.getSongs().stream())
+                .mapToLong(Song::getReproductions)
+                .reduce(0L, Long::sum);
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -183,7 +224,9 @@ public class StreamExercises {
      * <p>     * @return Set<String> con los países únicos
      */
     public Set<String> getUniqueCountries() {
-        throw new UnsupportedOperationException("Implementar ejercicio 7.1");
+        return artists.stream()
+                .map(Artist::getCountry)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -196,7 +239,11 @@ public class StreamExercises {
      * <p>     * @return String[] con los nombres ordenados descendente
      */
     public String[] getHipHopArtistsSortedDesc() {
-        throw new UnsupportedOperationException("Implementar ejercicio 7.2");
+        return  artists.stream()
+                .filter(artist -> artist.getGenre().equals("Hip-Hop"))
+                .map(Artist::getName)
+                .sorted(Comparator.reverseOrder())
+                .toArray(String[]::new);
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -213,7 +260,11 @@ public class StreamExercises {
      * <p>     * @return OptionalDouble con el promedio de duración
      */
     public OptionalDouble getAverageSongDuration() {
-        throw new UnsupportedOperationException("Implementar ejercicio 8.1");
+        return artists.stream()
+                .flatMap(artist -> artist.getAlbums().stream())
+                .flatMap(album -> album.getSongs().stream())
+                .mapToLong(song -> (long) song.getDurationSeconds())
+                .average();
     }
 
     /**
@@ -228,7 +279,12 @@ public class StreamExercises {
      * <p>     * @return LongSummaryStatistics de reproducciones del género Pop
      */
     public LongSummaryStatistics getPopReproductionStats() {
-        throw new UnsupportedOperationException("Implementar ejercicio 8.2");
+        return artists.stream()
+                .filter(artist -> artist.getGenre().equals("Pop"))
+                .flatMap(artist -> artist.getAlbums().stream())
+                .flatMap(album -> album.getSongs().stream())
+                .mapToLong(Song::getReproductions)
+                .summaryStatistics();
     }
 
     // ════════════════════════════════════════════════════════════════
@@ -246,7 +302,10 @@ public class StreamExercises {
      * <p>     * @return List<Artist> con artistas cuyo nombre empieza antes de "M"
      */
     public List<Artist> getArtistsBeforeM() {
-        throw new UnsupportedOperationException("Implementar ejercicio 9.1");
+        return artists.stream()
+                .sorted(Comparator.comparing(Artist::getName))
+                .takeWhile(artist -> artist.getName().compareTo("M") < 0)
+                .toList();
     }
 
     /**
@@ -261,7 +320,10 @@ public class StreamExercises {
      * <p>     * @return List<Artist> con artistas que tienen más de un álbum
      */
     public List<Artist> getArtistsWithMoreThanOneAlbum() {
-        throw new UnsupportedOperationException("Implementar ejercicio 9.2");
+        return artists.stream()
+                .sorted(Comparator.comparing(Artist::getName))
+                .dropWhile(artist -> artist.getAlbums().size() > 1)
+                .toList();
     }
 
     /**
@@ -274,7 +336,9 @@ public class StreamExercises {
      * @return Optional<Artist> con el primer artista que contenga "The"
      */
     public Optional<Artist> findFirstArtistWithThe() {
-        throw new UnsupportedOperationException("Implementar ejercicio 10.1");
+        return artists.stream()
+                .filter(artist -> artist.getName().contains("The"))
+                .findFirst();
     }
 
     /**
@@ -286,7 +350,9 @@ public class StreamExercises {
      * @return Optional<Artist> con cualquier artista de Jazz
      */
     public Optional<Artist> findAnyJazzArtist() {
-        throw new UnsupportedOperationException("Implementar ejercicio 10.2");
+       return artists.stream()
+               .filter(artist -> artist.getGenre().equals("Jazz"))
+               .findAny();
     }
 
 }
