@@ -16,7 +16,7 @@ public class Data {
     );
 
 
-    static Map<String, Double> RATINGS = Map.of(
+    public static Map<String, Double> RATINGS = Map.of(
             "The Last of Us",      9.5,
             "God of War",          9.4,
             "Hades",               9.2,
